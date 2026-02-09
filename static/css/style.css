@@ -1,0 +1,62 @@
+/* Variables de couleurs vibrantes */
+:root {
+    --main-bg: #f0f4f8;
+    --grad-primary: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
+    --grad-success: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    --grad-warning: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    --shadow-vibrant: 0 10px 20px rgba(0, 123, 255, 0.2);
+}
+
+body {
+    background-color: var(--main-bg);
+}
+
+/* Navbar colorée */
+.navbar {
+    background: var(--grad-primary) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Titre en dégradé */
+.text-gradient {
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* Cartes avec bordures colorées au survol */
+.custom-card {
+    border-radius: 20px !important;
+    border: none !important;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.custom-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(102, 16, 242, 0.15) !important;
+    border-bottom: 5px solid #6610f2 !important;
+}
+
+/* Badges de catégorie flashys */
+.badge-vibrant {
+    background: #eef2ff;
+    color: #4f46e5;
+    border: 1px solid #c7d2fe;
+    font-weight: bold;
+    padding: 8px 15px;
+}
+
+/* Prix qui ressort */
+.price-tag {
+    color: #28a745;
+    font-weight: 800;
+    font-size: 1.25rem;
+}
+
+/* Barre de recherche avec ombre bleue */
+.search-container {
+    border: 2px solid #007bff;
+    box-shadow: var(--shadow-vibrant);
+}

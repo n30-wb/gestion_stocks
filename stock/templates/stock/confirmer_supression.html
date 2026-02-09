@@ -1,0 +1,15 @@
+{% extends 'stock/base.html' %}
+
+{% block content %}
+<div class="card border-danger mx-auto" style="max-width: 500px;">
+    <div class="card-body text-center">
+        <h3 class="text-danger">Confirmer la suppression</h3>
+        <p>Voulez-vous vraiment supprimer "<strong>{{ objet.nom }}</strong>" ?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+            <a href="{% url 'liste_categories' %}" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

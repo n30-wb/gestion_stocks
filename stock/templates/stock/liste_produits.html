@@ -1,0 +1,90 @@
+{% extends 'stock/base.html' %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+
+<div class="container py-5 animate__animated animate__fadeIn" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1 class="display-3 fw-bolder" style="background: linear-gradient(90deg, #FF0080 0%, #7928CA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            🚀 Catalogue Pro
+        </h1>
+        <a href="{% url 'ajouter_produit' %}" class="btn btn-lg rounded-pill px-4 shadow-lg text-white"
+           style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+            <i class="bi bi-plus-lg me-2"></i> Ajouter un Produit
+        </a>
+    </div>
+
+    <div class="row mb-5 justify-content-center">
+        <div class="col-md-8">
+            <form method="get" class="shadow-lg rounded-pill overflow-hidden d-flex align-items-center bg-white p-2"
+                  style="border: 2px solid #7928CA;">
+                <input type="text" name="search" class="form-control border-0 ps-4 py-2 shadow-none"
+                       placeholder="Rechercher l'exceptionnel..." value="{{ search_query|default:'' }}">
+                <button class="btn rounded-pill px-4 text-white" type="submit"
+                        style="background: #7928CA;">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+            {% if search_query %}
+            <p class="text-center mt-3">
+                <span class="badge bg-light text-dark shadow-sm p-2 px-3">
+                    Résultat pour : "{{ search_query }}"
+                    <a href="{% url 'liste_produits' %}" class="text-danger ms-2"><i class="bi bi-x-circle-fill"></i></a>
+                </span>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for produit in page_obj %}
+        <div class="col">
+            <div class="card h-100 border-0 shadow-lg" style="border-radius: 25px; transition: transform 0.3s;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge rounded-pill px-3 py-2"
+                              style="background-color: #f3e8ff; color: #7928CA; border: 1px solid #7928CA;">
+                            <i class="bi bi-tag-fill me-1"></i> {{ produit.categorie.nom }}
+                        </span>
+                        <div class="fw-bold fs-4" style="color: #00b894;">{{ produit.prix }} FCFA</div>
+                    </div>
+
+                    <h3 class="h4 fw-extrabold mb-2 text-dark">{{ produit.nom }}</h3>
+                    <p class="text-muted small lh-base" style="height: 60px; overflow: hidden;">
+                        {{ produit.description|truncatechars:120 }}
+                    </p>
+                </div>
+
+                <div class="card-footer bg-transparent border-0 d-flex justify-content-end p-4 pt-0">
+                    <a href="{% url 'modifier_produit' produit.id %}" class="btn btn-warning rounded-circle me-3 shadow text-white"
+                       style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: #fdcb6e; border: none;">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <a href="{% url 'supprimer_produit' produit.id %}" class="btn btn-danger rounded-circle shadow"
+                       style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: #ff7675; border: none;">
+                        <i class="bi bi-trash3-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <i class="bi bi-emoji-frown display-1 text-muted"></i>
+            <p class="fs-4 text-muted mt-3">Aucun produit trouvé dans cette galaxie...</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="mt-5 d-flex justify-content-center">
+        {% include "stock/pagination.html" %}
+    </div>
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(121, 40, 202, 0.25) !important;
+    }
+</style>
+{% endblock %}
